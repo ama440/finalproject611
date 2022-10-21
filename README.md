@@ -1,3 +1,6 @@
+Chronic Health Condition and Behavioral Risk Factors for Heart Disease
+===========================================================================
+
 In this project I analyze the Behavioral Risk Factor Surveillance System (BRFSS) data from 2015. The BRFSS interviews roughly 450,000 US adults by telephone each year, collecting data about health risk behaviors, chronic health conditions, and dietary and exercise habits. The data also includes basic demographic information. My goal was to identify the main risk factors for heart disease, the leading cause of death in the United States. Using a selection of other chronic health variables, as well as dietary, smoking, and exercise information, I determine what conditions and habits are most highly associated with heart disease.
 
 According to the Centers for Disease Control and Prevention (CDC), there are several main risk factors for heart disease. Health conditions like high blood pressure, high blood cholesterol levels, diabetes, and obesity are known to increase the risk of heart disease. In addition, behaviors such as lack of physical activity, improper diet, excessive alcohol consumption, and tobacco use increase the risk of heart disease. In my analysis of the BRFSS data, I examine the strength of association between these variables and heart disease.
@@ -10,5 +13,30 @@ Link to the dataset: https://www.kaggle.com/datasets/cdc/behavioral-risk-factor-
 
 Link to the codebook containing information about the variables: https://www.cdc.gov/brfss/annual_data/2015/pdf/codebook15_llcp.pdf
 
-How to reproduce this project:
+Using This Repository
+=====================
+
+This repository is best used via Docker although you may be able to
+consult the Dockerfile to understand what requirements are appropriate
+to run the code.
+
+One Docker container is provided for both "production" and
+"development." To build it you will need to create a file called
+`.password` which contains the password you'd like to use for the
+rstudio user in the Docker container. Then you run:
+
+This will create a docker container. Users using a unix-flavor should
+be able to start an RStudio server by running:
+
+```
+docker run -v $(pwd):/home/rstudio/ashar-ws\
+           -p 8787:8787\
+           -e PASSWORD="$(cat .password)"\
+           -it ashar
+```
+
+You then visit http://localhost:8787 via a browser on your machine to
+access the machine and development environment. For the curious, we
+also expose port 8888 so that we can launch other servers from in the
+container.
 
