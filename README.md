@@ -9,3 +9,6 @@ In terms of my analysis, I produce visualizations--some interactive--that effect
 Link to the dataset: https://www.kaggle.com/datasets/cdc/behavioral-risk-factor-surveillance-system?select=2015.csv
 
 Link to the codebook containing information about the variables: https://www.cdc.gov/brfss/annual_data/2015/pdf/codebook15_llcp.pdf
+
+How to reproduce this project:
+
