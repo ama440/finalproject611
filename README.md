@@ -9,12 +9,14 @@ The dataset is quite large, containing several hundred variables and over 400,00
 
 In terms of my analysis, I produce visualizations--some interactive--that effectively present information about the dataset. I also create several predictive models that help quantify the association between heart disease and its potential risk factors. Given the large size of the dataset, I splitting into training and testing sets.
 
-Link to the dataset: https://www.kaggle.com/datasets/cdc/behavioral-risk-factor-surveillance-system?select=2015.csv
-
-Link to the codebook containing information about the variables: https://www.cdc.gov/brfss/annual_data/2015/pdf/codebook15_llcp.pdf
-
 Using This Repository
 =====================
+
+The dataset is too large to be uploaded to Github, so you can instead find it here:
+
+- Link to the dataset: https://www.kaggle.com/datasets/cdc/behavioral-risk-factor-surveillance-system?select=2015.csv
+
+- Link to the codebook containing information about the variables: https://www.cdc.gov/brfss/annual_data/2015/pdf/codebook15_llcp.pdf
 
 This repository is best used via Docker although you may be able to
 consult the Dockerfile to understand what requirements are appropriate
@@ -36,7 +38,5 @@ docker run -v $(pwd):/home/rstudio/ashar-ws\
 ```
 
 You then visit http://localhost:8787 via a browser on your machine to
-access the machine and development environment. For the curious, we
-also expose port 8888 so that we can launch other servers from in the
-container.
+access the machine and development environment.
 
