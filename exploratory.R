@@ -1,7 +1,7 @@
 source("setup.R")
 
-health$CVDCRHD4
-health %>% filter(CVDCRHD4 == 1) %>% nrow()
+# health$CVDCRHD4
+# health %>% filter(CVDCRHD4 == 1) %>% nrow()
 
 ggplot(health, aes(AGE80)) + geom_histogram(binwidth = 4)
 
@@ -17,7 +17,7 @@ agebox <- ggplot(age_heart, aes(x=factor(CVDCRHD4), y=AGE80)) +
   geom_boxplot(outlier.shape = 8) +
   labs(x = "Heart Disease Status", y = "Age", title = "Comparative Boxplots") +
   coord_flip()
-ggsave("figures/agebox.png",plot=agebox)
+ggsave("figures/agebox.png", plot = agebox)
 
 age.logit = glm(CVDCRHD4 ~ AGE80, family=binomial, data=age_heart)
 summary(age.logit)
