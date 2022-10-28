@@ -23,15 +23,16 @@ Clone the Git repository onto your local filesystem, then manually save the data
 Once you have the repository, you can use Docker to start an RStudio server and reproduce the report. To do so, make sure Docker Desktop is running, and then run the following code in the terminal:
 
 ```
-docker run -v $(pwd):/home/rstudio/ashar-ws\
-           -p 8787:8787\
+docker run -v $(pwd):/home/rstudio/work\
            -e PASSWORD=yourpassword\
-           -it ashar
+           -p 8787:8787\
+           --rm\
+           rocker/verse
 ```
 
 where you can replace `yourpassword` with a password of your choosing. You then visit http://localhost:8787 via a browser on your machine to access the machine and development environment.
 
-Once the RStudio server is running, you can reproduce the report by running `make writeup.pdf` in the terminal within the Docker container. One error I was getting looked like this:
+Once the RStudio server is running, first make `work` the working directory. You can then reproduce the report by running `make writeup.pdf` in the terminal within the Docker container. One error I was getting looked like this:
 
 ```
 ! LaTeX Error: File `geometry.sty' not found.
