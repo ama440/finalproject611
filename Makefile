@@ -21,5 +21,5 @@ figures/agebox.png: source_data/data2015.csv exploratory.R setup.R
 	Rscript exploratory.R
 
 # Build the final report for the project.
-writeup.pdf: figures/agebox.png
+writeup.pdf: figures/agebox.png writeup.tex
 	pdflatex writeup.tex
