@@ -1,11 +1,11 @@
 source("setup.R")
 
+## Code for my own analysis that I want make to ignore
 # health$CVDCRHD4
 # health %>% filter(CVDCRHD4 == 1) %>% nrow()
 
-ggplot(health, aes(AGE80)) + geom_histogram(binwidth = 4)
-
-ggplot(health, aes(AGEG5YR)) + geom_bar()
+# ggplot(health, aes(AGE80)) + geom_histogram(binwidth = 4)
+# ggplot(health, aes(AGEG5YR)) + geom_bar()
 
 age_heart <- health %>% 
   filter(CVDCRHD4 == 1 | CVDCRHD4 == 2) %>% 
@@ -28,18 +28,3 @@ smoke_heart <- health %>%
   mutate(CVDCRHD4 = ifelse(CVDCRHD4 == 1, 1, 0)) %>% 
   mutate(CVDCRHD4 = factor(CVDCRHD4)) %>% 
   select(CVDCRHD4, SMOKER3)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
