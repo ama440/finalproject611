@@ -18,25 +18,29 @@ The dataset is too large to be uploaded to Github, so you can instead find it he
 
 - Link to the codebook containing information about the variables: https://www.cdc.gov/brfss/annual_data/2015/pdf/codebook15_llcp.pdf
 
-This repository is best used via Docker although you may be able to
-consult the Dockerfile to understand what requirements are appropriate
-to run the code.
+Clone the Git repository onto your local filesystem, then manually save the dataset as a file named data2015.csv in a folder called source_data within the repository. Note that when you press the download button on Kaggle, the folder will contain data from 2011 to 2015. Keep only the 2015 dataset, since that is the one I used for this analysis.
 
-One Docker container is provided for both "production" and
-"development." To build it you will need to create a file called
-`.password` which contains the password you'd like to use for the
-rstudio user in the Docker container. Then you run:
-
-This will create a docker container. Users using a unix-flavor should
-be able to start an RStudio server by running:
+Once you have the repository, you can use Docker to start an RStudio server and reproduce the report. To do so, make sure Docker Desktop is running, and then run the following code in the terminal:
 
 ```
 docker run -v $(pwd):/home/rstudio/ashar-ws\
            -p 8787:8787\
-           -e PASSWORD="$(cat .password)"\
+           -e PASSWORD=yourpassword\
            -it ashar
 ```
 
-You then visit http://localhost:8787 via a browser on your machine to
-access the machine and development environment.
+where you can replace `yourpassword` with a password of your choosing. You then visit http://localhost:8787 via a browser on your machine to access the machine and development environment.
+
+Once the RStudio server is running, you can reproduce the report by running `make writeup.pdf` in the terminal within the Docker container. One error I was getting looked like this:
+
+```
+! LaTeX Error: File `geometry.sty' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: sty)
+```
+
+This error does not seem to be causing any issues in creating the report, so you can simply press enter (3 times I believe) to bypass these error messages.
+
+Finally, running `make clean` will remove the writeup and generated figures from the repository.
 
