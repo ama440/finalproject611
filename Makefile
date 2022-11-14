@@ -16,10 +16,15 @@ clean:
 	mkdir -p derived_data
 	touch .created-dirs
 
-# Build a figure showing comparative boxplot of age distribution by heart disease status
-figures/agebox.png: source_data/data2015.csv exploratory.R setup.R
+
+# Build summary figures
+figures/agehist.png figures/agebox.png figures/bmibox.png figures/fruitbox.png\
+ figures/smoking_mosaic.png figures/heart_attack_mosaic.png figures/agesmokebox.png:\
+ source_data/data2015.csv exploratory.R setup.R
 	Rscript exploratory.R
 
 # Build the final report for the project.
-writeup.pdf: figures/agebox.png writeup.tex
+writeup.pdf: figures/agehist.png figures/agebox.png figures/bmibox.png\
+ figures/fruitbox.png figures/smoking_mosaic.png figures/heart_attack_mosaic.png\
+ figures/agesmokebox.png writeup.tex
 	pdflatex writeup.tex
