@@ -7,7 +7,7 @@ According to the Centers for Disease Control and Prevention (CDC), there are sev
 
 The dataset is quite large, containing several hundred variables and over 400,000 observations. As such, the cleaning and manipulation of the dataset poses a challenge. Though several people on Kaggle have posted cleaned datasets, I think this pre-analysis data manipulation process will help me develop crucial R and/or Python skills, and it will also allow me to select the variables I would like to keep. I believe there is also a fair amount of missing data, so starting with the raw dataset will allow me to address the missingness in the manner I deem most appropriate.
 
-In terms of my analysis, I produce visualizations--some interactive--that effectively present information about the dataset. I also create several predictive models that help quantify the association between heart disease and its potential risk factors. Given the large size of the dataset, I splitting into training and testing sets.
+In terms of my analysis, I produce visualizations--(hopefully) some interactive--that effectively present information about the dataset. I also create several predictive models that help quantify the association between heart disease and its potential risk factors. Given the large size of the dataset, I split into training and testing sets.
 
 Using This Repository
 =====================
@@ -20,28 +20,23 @@ The dataset is too large to be uploaded to Github, so you can instead find it he
 
 Clone the Git repository onto your local filesystem, then manually save the dataset as a file named data2015.csv in a folder called source_data within the repository. Note that when you press the download button on Kaggle, the folder will contain data from 2011 to 2015. Keep only the 2015 dataset, since that is the one I used for this analysis.
 
-Once you have the repository, you can use Docker to start an RStudio server and reproduce the report. To do so, make sure Docker Desktop is running, and then run the following code in the terminal:
+Once you have the repository, you can use Docker to start an RStudio server and reproduce the report. To do so, make sure Docker Desktop is running, and then build the Docker container using the following code:
+
+```
+docker build . -t 611-final-project
+```
+
+You can then launch the container using the command
 
 ```
 docker run -v $(pwd):/home/rstudio/work\
            -e PASSWORD=yourpassword\
            -p 8787:8787\
            --rm\
-           rocker/verse
+           611-final-project
 ```
 
-where you can replace `yourpassword` with a password of your choosing. You then visit http://localhost:8787 via a browser on your machine to access the machine and development environment.
+where you should replace `yourpassword` with a password of your choosing. You then visit http://localhost:8787 via a browser on your machine to access the machine and development environment.
 
-Once the RStudio server is running, first make `work` the working directory. You can then reproduce the report by running `make writeup.pdf` in the terminal within the Docker container. One error I was getting looked like this:
-
-```
-! LaTeX Error: File `geometry.sty' not found.
-
-Type X to quit or <RETURN> to proceed,
-or enter new name. (Default extension: sty)
-```
-
-This error does not seem to be causing any issues in creating the report, so you can simply press enter (3 times I believe) to bypass these error messages.
-
-Finally, running `make clean` will remove the writeup and generated figures from the repository.
+Once the RStudio server is running, first make `work` the working directory. You can then reproduce the report by running `make writeup.pdf` in the terminal within the Docker container. Running `make clean` will remove the writeup and generated figures from the repository.
 
