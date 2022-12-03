@@ -84,8 +84,18 @@ agesmokebox <- ggplot(health %>% filter(!(is.na(smoking)))) +
   scale_x_discrete(labels=c("Never", "Former", "Some Days", "Every Day"))
 ggsave("figures/agesmokebox.png", plot=agesmokebox)
 
+ggplot(health %>% filter(!(is.na(smoking)))) + 
+  geom_mosaic(aes(x = product(smoking, age_cat), fill=smoking))
+
 heart_attack_mosaic <- ggplot(data = health %>% filter(!(is.na(heart_attack)))) +
   geom_mosaic(aes(x = product(heart_attack, chd), fill=heart_attack))
 ggsave("figures/heart_attack_mosaic.png", plot=heart_attack_mosaic)
 
+cor(health$cardio_freq, health$strength_freq, use = "complete.obs")
+cor(health$cardio_freq, health$bmi, use = "complete.obs")
+cor(health$strength_freq, health$bmi, use = "complete.obs")
+
+cor(health$cardio_freq, health$fruit, use = "complete.obs")
+cor(health$alcohol_freq, health$bmi, use = "complete.obs")
+cor(health$fruit, health$vegetable, use = "complete.obs")
 
