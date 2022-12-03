@@ -18,7 +18,7 @@ The dataset is too large to be uploaded to Github, so you can instead find it he
 
 - Link to the codebook containing information about the variables: https://www.cdc.gov/brfss/annual_data/2015/pdf/codebook15_llcp.pdf
 
-Clone the Git repository onto your local filesystem, then manually save the dataset as a file named data2015.csv in a folder called source_data within the repository. Note that when you press the download button on Kaggle, the folder will contain data from 2011 to 2015. Keep only the 2015 dataset, since that is the one I used for this analysis.
+Clone the Git repository onto your local filesystem, then manually save the dataset as a file named "data2015.csv" in a folder called "source_data" within the repository. Note that when you press the download button on Kaggle, the folder will contain data from 2011 to 2015. Keep only the 2015 dataset, since that is the one I used for this analysis.
 
 Once you have the repository, you can use Docker to start an RStudio server and reproduce the report. To do so, make sure Docker Desktop is running, and then build the Docker container using the following code:
 
