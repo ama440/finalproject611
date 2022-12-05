@@ -12,3 +12,7 @@ RUN Rscript --no-restore --no-save -e "tinytex::tlmgr_install(c(\"etoolbox\",\"x
 RUN R -e "install.packages(\"pROC\")"
 RUN R -e "install.packages(\"rpart\")"
 RUN R -e "install.packages(\"rpart.plot\")"
+RUN R -e "install.packages(\"gbm\")"
+RUN Rscript --no-restore --no-save -e "tinytex::tlmgr_install(c(\"wrapfig\",\"subcaption\",\"pgfplotstable\",\"filecontents\"))"
+RUN Rscript --no-restore --no-save -e "tinytex::tlmgr_install(c(\"longtable\",\"grfext\"))"
+RUN Rscript --no-restore --no-save -e "tinytex::tlmgr_install(\"caption\")"
