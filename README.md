@@ -36,7 +36,7 @@ docker run -v $(pwd):/home/rstudio/work\
            611-final-project
 ```
 
-where you should replace `yourpassword` with a password of your choosing. You then visit http://localhost:8787 via a browser on your machine to access the machine and development environment.
+where you should replace `yourpassword` with a password of your choosing. You then visit http://localhost:8787 via a browser on your machine to access the machine and development environment. Log in using the username "rstudio" and the password you set when launching the container.
 
 Once the RStudio server is running, first make `work` the working directory. You can then reproduce the report by running `make writeup.pdf` in the terminal within the Docker container. Running `make clean` will remove the writeup and generated figures from the repository.
 
