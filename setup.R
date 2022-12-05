@@ -3,6 +3,11 @@ library(FactoMineR)
 library(factoextra)
 library(ggmosaic)
 library(fastDummies)
+library(MASS)
+library(pROC)
+library(rpart)
+library(rpart.plot)
+library(gbm)
 
 df <- read_csv("source_data/data2015.csv")
 health <- df
@@ -10,7 +15,7 @@ names(health) <- gsub('_', '', names(health)) # Remove '_' from column names
 colnames(health) <- make.unique(names(health))
 
 health <- health %>% 
-  select(DISPCODE, GENHLTH, PHYSHLTH, MENTHLTH, HLTHPLN1, MEDCOST, CHECKUP1,
+  dplyr::select(DISPCODE, GENHLTH, PHYSHLTH, MENTHLTH, HLTHPLN1, MEDCOST, CHECKUP1,
          RFHYPE5, RFCHOL, CVDINFR4, CVDCRHD4, CVDSTRK3, ASTHMA3, CHCSCNCR, 
          CHCOCNCR, CHCCOPD1, HAVARTH3, ADDEPEV2, CHCKIDNY, DIABETE3, 
          SEX, AGE80, AGEG5YR, BMI5, MARITAL, EDUCA, RACE, VETERAN3, INCOME2,
