@@ -1,8 +1,4 @@
 source("setup.R")
-library(MASS)
-library(pROC)
-library(rpart)
-library(rpart.plot)
 
 # Split into training and testing
 set.seed(1)
@@ -33,7 +29,7 @@ summary(heartattack.logit)
 
 univariate <- data.frame(matrix(nrow=26, ncol=5))
 names(univariate) <- c("Predictor", "Estimate", "Std. Error", "z value", "Pr(>|z|)")
-names <- names(train %>% select(-chd, 
+names <- names(train %>% dplyr::select(-chd, 
                                  -interview_completed,
                                  -general_health,
                                  -age_cat,
@@ -45,11 +41,13 @@ names <- names(train %>% select(-chd,
 univariate$Predictor <- names
 
 for (predictor in names) {
-  model <- glm(train$chd ~ . , family=binomial, data = train %>% select(predictor))
+  model <- glm(train$chd ~ . , family=binomial, data = train %>% dplyr::select(predictor))
   univariate[which(univariate$Predictor == predictor), 2:5] <- summary(model)$coefficients[2,]
 }
 
 univariate[,2:5] <- round(univariate[,2:5], 3)
+
+write_csv(univariate, file = "univariate.csv")
 
 # Full Model
 df <- train %>% dplyr::select(-c(age_cat, 
@@ -74,7 +72,7 @@ cor(train %>% dplyr::select("days_poor_phys_health",
 xnam <- names(df %>% dplyr::select(-chd))
 fmla <- as.formula(paste("chd ~ ", paste(xnam, collapse = "+")))
 
-# Stepwise model selection
+# Stepwise model dplyr::selection
 # null <- glm(chd~1, family = binomial, data = df)
 # model.AIC <- stepAIC(model.full, direction = "backward",
 #                      scope=list(lower=null, upper=fmla), trace=2)
@@ -93,7 +91,15 @@ model.final <- glm(chd ~ bp_high + blood_chol_high + heart_attack + stroke + had
                    depression + kidney_disease + diabetes + sex + age + bmi + 
                    smoking + alcohol_freq + vegetable + cardio_freq,
                  family = binomial, data = train)
-summary(model.final)
+
+write.csv(data.frame(round(summary(model.final)$coefficients,3)), file = "summary_log.csv")
+
+# Prediction model
+model.final <- glm(chd ~ bp_high + blood_chol_high + stroke + had_or_has_asthma + 
+                     skin_cancer + cancer_other + copd_emph_bronc + arthritis + 
+                     depression + kidney_disease + diabetes + sex + age + bmi + 
+                     smoking + alcohol_freq + vegetable + cardio_freq,
+                   family = binomial, data = train)
 
 ## Assessment
 # Find the AUC for the model on the test set and plot the ROC curve
@@ -102,14 +108,17 @@ test <- test %>% mutate(pred.logist=predict(model.final, newdata = test, type="r
 roc.test.logist <- roc(test$chd, test$pred.logist)
 roc.test.logist$auc
 
-ggroc(roc.test.logist,legacy.axes = TRUE) +
-  geom_segment(aes(x=0, xend=1, y=0, yend=1),linetype="dashed")
+roc_log <- ggroc(roc.test.logist,legacy.axes = TRUE) +
+  geom_segment(aes(x=0, xend=1, y=0, yend=1),linetype="dashed") +
+  coord_fixed() +
+  labs(title = "ROC Curve for Logistic Model")
+ggsave("figures/roc_log.png", plot = roc_log, scale = 2)
 
 # Accuracy metrics
 coords <- coords(roc.test.logist)
-coords[which(abs(coords$sensitivity-.8)==min(abs(coords$sensitivity-.8))),]
+coords[which(abs(coords$sensitivity-.75)==min(abs(coords$sensitivity-.75))),]
 
-cutoff <- 0.05736810      
+cutoff <- 0.07273733      
 TP <- length(which(test$pred.logist > cutoff & test$chd == 1))
 TN <- length(which(test$pred.logist < cutoff & test$chd == 0))
 FP <- length(which(test$pred.logist > cutoff & test$chd == 0))
