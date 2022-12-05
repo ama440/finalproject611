@@ -7,7 +7,7 @@ According to the Centers for Disease Control and Prevention (CDC), there are sev
 
 The dataset is quite large, containing several hundred variables and over 400,000 observations. As such, the cleaning and manipulation of the dataset poses a challenge. Though several people on Kaggle have posted cleaned datasets, I think this pre-analysis data manipulation process will help me develop crucial R and/or Python skills, and it will also allow me to select the variables I would like to keep. I believe there is also a fair amount of missing data, so starting with the raw dataset will allow me to address the missingness in the manner I deem most appropriate.
 
-In terms of my analysis, I produce visualizations--(hopefully) some interactive--that effectively present information about the dataset. I also create several predictive models that help quantify the association between heart disease and its potential risk factors. Given the large size of the dataset, I split into training and testing sets.
+In terms of my analysis, I produce univariate and bivariate visualizations that summarize information about the dataset and attempt to visualize the data in two dimensions by performing principal component analysis and multiple correspondence analysis. I also create several predictive models that help quantify the association between heart disease and its potential risk factors. Given the large size of the dataset, I split into training and testing sets.
 
 Using This Repository
 =====================
@@ -38,5 +38,5 @@ docker run -v $(pwd):/home/rstudio/work\
 
 where you should replace `yourpassword` with a password of your choosing. You then visit http://localhost:8787 via a browser on your machine to access the machine and development environment. Log in using the username "rstudio" and the password you set when launching the container.
 
-Once the RStudio server is running, first make `work` the working directory. You can then reproduce the report by running `make writeup.pdf` in the terminal within the Docker container. Running `make clean` will remove the writeup and generated figures from the repository.
+Once the RStudio server is running, first make `work` the working directory. You can then reproduce the report by running `make writeup.pdf` in the terminal within the Docker container. Running `make clean` will remove the writeup and generated figures from the repository. The file `writeup_copy.pdf` contains the report in case any step in the process goes wrong.
 
